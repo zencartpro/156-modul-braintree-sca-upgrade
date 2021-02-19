@@ -43,9 +43,9 @@
 Copyright<br>
     (c) 2021 webchills (<a href="http://www.webchills.at" target="_blank">www.webchills.at</a>)<br>
     <br>
-    Version 2.1.0 - 19.02.2021
+    Version 2.1.0 - 20.02.2021
     <ul>
-  <li>Überarbeitung des Braintree Moduls 2.0.0 von Numinix für die deutsche Zen Cart Version 1.5.6e</li>
+  <li>Überarbeitung und Bugfixing des Braintree Moduls 2.0.0 von Numinix für die deutsche Zen Cart Version 1.5.6e</li>
     <li>multilinguale Ausgabe der Braintree Rückmeldungen</li>
     <li>Integration einer Übersicht der Braintree Transaktionen in der Zen Cart Administration unter Kunden > Braintree Transaktionen
     </li></ul>
@@ -119,20 +119,27 @@ Das ist OK, Sie müssen hier keinerlei Dateivergleiche anstellen, einfach hochla
   DEINTEMPLATE steht für den Namen des im Shop aktiven Templates, z.B. responsive classic<br>
   Diese Datei enthält noch Styledefinitionen des alten Braintree Moduls, die nun nicht mehr nötig sind.<br>
   Entfernen Sie alle Definitionen, die mit #braintree_api-cc beginnen. <br>
-  Eine Beispieldatei, die die einzige noch nötige Braintree Definition enthält, finden Sie im Ordner GEAENDERTE DATEIEN<br>
+  Eine Beispieldatei, die die einzige noch nötige Braintree Definition enthält, finden Sie im Ordner GEAENDERTE DATEIEN:</p>
+<p>.ccinfobraintree{<br/>
+	display:none;<br/>
+}</p>
+<p>Falls in Ihrem Template die Beschreibungstexte für die Eingabefelder unterscheidlich lang angezeigt werden, dann können Sie mit einer fixen Breite für die Klasse .inputLabelPayment arbeiten und z.B. zusätzlich definieren:<br/><br/>
+  .ccinfobraintree .inputLabelPayment{<br/>
+  width:160px !important;<br/>
+  }<br/>
   <br>
   6)<br>
-Machen Sie nun eine Testbestellung und wählen als Zahlungsart Kreditkarte, um sich mit dem neuen Ablauf vertraut zu machen.<br>
-Die Eingabefelder für Vorname und Nachname gibt es nun nicht mehr, lediglich Kreditkartennummer, Ablaufdatum und CVV Code.<br>
-Bevor die Daten in die checkout_confirmation Seite übernommen werden, findet die Prüfung statt. Falls die kartenausgebende Bank für diese Karte eine 3D Secure Code oder sonstige zusätzliche Authentifizierung vorschreibt, öffnet sich in einem Ajax Popup die Bestätigungsseite der jeweiligen Bank zur Eingabe des Authentifzierungscodes.
-Wird das vom Kunden korrekt ausgefüllt, geht es weiter zur checkout_confirmation Seite, wo der Kunde wie bisher im alten Modul ganz normal mit &quot;Kaufen&quot; die Bestellung bestätigt und dadurch Zahlung und Bestellung auslöst.<br>
-Sollten Sie das ganze im Sandbox Modus verwenden, dann können Sie zum Testen diverser Szenarien spezielle Testkreditkartennummern verwenden, so wie hier beschrieben:<br>
-<a href="https://developers.braintreepayments.com/guides/3d-secure/testing-go-live/php" target="_blank">https://developers.braintreepayments.com/guides/3d-secure/testing-go-live/php</a><br>
-<br>
-7)<br>
-Unter Kunden ist nun ein neuer Menüpunkt Braintree Transaktionen vorhanden, der eine Übersicht aller via Braintree erfolgten Bestellungen gibt.
-<br>
-Die Rückerstattung via Shopadministration ist genauso wie bisher möglich. Beachten Sie bitte, dass eine Teilrückerstattung erst dann möglich ist, wenn die Transaktion den Status settled erreicht hat. Vorher wird der Button für eine Teilrückerstattung gar nicht erst erscheinen.
+  Machen Sie nun eine Testbestellung und wählen als Zahlungsart Kreditkarte, um sich mit dem neuen Ablauf vertraut zu machen.<br>
+  Die Eingabefelder für Vorname und Nachname gibt es nun nicht mehr, lediglich Kreditkartennummer, Ablaufdatum und CVV Code.<br>
+  Bevor die Daten in die checkout_confirmation Seite übernommen werden, findet die Prüfung statt. Falls die kartenausgebende Bank für diese Karte eine 3D Secure Code oder sonstige zusätzliche Authentifizierung vorschreibt, öffnet sich in einem Ajax Popup die Bestätigungsseite der jeweiligen Bank zur Eingabe des Authentifzierungscodes.
+  Wird das vom Kunden korrekt ausgefüllt, geht es weiter zur checkout_confirmation Seite, wo der Kunde wie bisher im alten Modul ganz normal mit &quot;Kaufen&quot; die Bestellung bestätigt und dadurch Zahlung und Bestellung auslöst.<br>
+  Sollten Sie das ganze im Sandbox Modus verwenden, dann können Sie zum Testen diverser Szenarien spezielle Testkreditkartennummern verwenden, so wie hier beschrieben:<br>
+  <a href="https://developers.braintreepayments.com/guides/3d-secure/testing-go-live/php" target="_blank">https://developers.braintreepayments.com/guides/3d-secure/testing-go-live/php</a><br>
+  <br>
+  7)<br>
+  Unter Kunden ist nun ein neuer Menüpunkt Braintree Transaktionen vorhanden, der eine Übersicht aller via Braintree erfolgten Bestellungen gibt.
+  <br>
+  Die Rückerstattung via Shopadministration ist genauso wie bisher möglich. Beachten Sie bitte, dass eine Teilrückerstattung erst dann möglich ist, wenn die Transaktion den Status settled erreicht hat. Vorher wird der Button für eine Teilrückerstattung gar nicht erst erscheinen.
 </p>
 <h3>&nbsp;</h3>
   </div>
