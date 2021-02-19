@@ -5,8 +5,10 @@
  * @copyright Copyright 2003-2021 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: braintree_api.php 2021-02-19 15:35:14 webchills $
+ * @version $Id: braintree_api.php 2021-02-19 22:47:14 webchills $
 */
+use Braintree\Gateway;
+use Braintree\Transaction;
 require_once(DIR_FS_CATALOG . DIR_WS_MODULES . 'payment/braintree/lib/Braintree.php');
 
 if (!defined('TABLE_BRAINTREE'))
@@ -345,6 +347,7 @@ class braintree_api extends base {
 
 
         $clientToken = $this->gateway()->clientToken()->generate();
+        $amount = zen_round($order->info['total'], 2);
         if ($_SESSION['language']=='german') {
         $fieldsArray[] = [
             'field' => "
@@ -388,9 +391,9 @@ class braintree_api extends base {
                 <input type='text' class='hide_field' name='braintree_3ds_auth_id' id='braintree_3ds_auth_id'>
                 <input type='text' class='hide_field' name='braintree_card_type' id='braintree_card_type'>
                 
-                <script src='https://js.braintreegateway.com/web/3.70.0/js/client.min.js'></script>
-                <script src='https://js.braintreegateway.com/web/3.70.0/js/three-d-secure.js'></script>
-                <script src='https://js.braintreegateway.com/web/3.70.0/js/hosted-fields.js'></script>
+                <script src='https://js.braintreegateway.com/web/3.73.1/js/client.min.js'></script>
+                <script src='https://js.braintreegateway.com/web/3.73.1/js/three-d-secure.min.js'></script>
+                <script src='https://js.braintreegateway.com/web/3.73.1/js/hosted-fields.min.js'></script> 
                 <script>
                     let hf, threeDS;
                     function braintreeCheck(){
@@ -407,7 +410,7 @@ class braintree_api extends base {
                                 onLookupComplete: function(data, next){
                                     next();
                                 },
-                                amount: '".$order->info['total']."',
+                                amount: '".$amount."',
                                 nonce: payload.nonce,
                                 bin:payload.details.bin,
                                 email: '".$order->customer['email_address']."',
@@ -611,9 +614,9 @@ class braintree_api extends base {
                 <input type='text' class='hide_field' name='braintree_3ds_auth_id' id='braintree_3ds_auth_id'>
                 <input type='text' class='hide_field' name='braintree_card_type' id='braintree_card_type'>
                 
-                <script src='https://js.braintreegateway.com/web/3.70.0/js/client.min.js'></script>
-                <script src='https://js.braintreegateway.com/web/3.70.0/js/three-d-secure.js'></script>
-                <script src='https://js.braintreegateway.com/web/3.70.0/js/hosted-fields.js'></script>
+                <script src='https://js.braintreegateway.com/web/3.73.1/js/client.min.js'></script>
+                <script src='https://js.braintreegateway.com/web/3.73.1/js/three-d-secure.min.js'></script>
+                <script src='https://js.braintreegateway.com/web/3.73.1/js/hosted-fields.min.js'></script> 
                 <script>
                     let hf, threeDS;
                     function braintreeCheck(){
@@ -630,7 +633,7 @@ class braintree_api extends base {
                                 onLookupComplete: function(data, next){
                                     next();
                                 },
-                                amount: '".$order->info['total']."',
+                                amount: '".$amount."',
                                 nonce: payload.nonce,
                                 bin:payload.details.bin,
                                 email: '".$order->customer['email_address']."',
