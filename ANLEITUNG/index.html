@@ -1,0 +1,197 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Braintree 2.1.0 - SCA Upgrade für Zen Cart 1.5.6e deutsch</title>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta http-equiv="content-language" content="de">
+<meta name="description" content="SCA Upgrade für das Braintree Modul in Zen Cart 1.5.6e deutsch">
+<link rel="stylesheet" type="text/css" href="includes/css/stylesheet.css">  
+<script type="text/javascript" src="includes/jscript/jscript_tabs.js"></script>
+</head>
+<body>
+<div id="wrapper">
+<div id="header">
+<h1>Braintree 2.1.0 - SCA Upgrade für Zen Cart 1.5.6e deutsch</h1>
+</div>
+
+<div id="slidetabsmenu" style="display: none;">
+<ul>
+  <li> <a onClick="expandcontent('sc1', this)" href="javascript:void(0)"><span>Sinn und Zweck</span></a></li>
+  <li> <a onClick="expandcontent('sc2', this)" href="javascript:void(0)"><span>Installation</span></a></li>
+  
+  <li> <a onClick="expandcontent('sc5', this)" href="javascript:void(0)"><span>Download & Support</span></a></li>
+  <li> <a onClick="expandcontent('sc6', this)" href="javascript:void(0)"><span>Unterstützen</span></a></li>
+ </ul>
+</div>
+<br style="clear: both;">
+
+<!--Begin tabcontainer-->
+<div id="tabcontentcontainer">
+
+<!--Begin sc1-->
+<div class="tabcontent" id="sc1" style="display: block;">
+<div class="textcontent">
+<div class="regularlist">
+
+<h2>Sinn und Zweck dieses Moduls</h2>
+
+  <p>Dieses Modul aktualisiert das in der deutschen Zen Cart Version 1.5.6e vorinstallierte Braintree Kreditkartenmodul auf Version 2.1.0.<br/>
+  Damit wird die seit 2021 verpflichtende SCA (Strong Customer Authentication) unterstützt.
+</p>
+<h3>Copyright, Version, Changelog Lizenz</h3>
+Copyright<br>
+    (c) 2021 webchills (<a href="http://www.webchills.at" target="_blank">www.webchills.at</a>)<br>
+    <br>
+    Version 2.1.0 - 19.02.2021
+    <ul>
+  <li>Überarbeitung des Braintree Moduls 2.0.0 von Numinix für die deutsche Zen Cart Version 1.5.6e</li>
+    <li>multilinguale Ausgabe der Braintree Rückmeldungen</li>
+    <li>Integration einer Übersicht der Braintree Transaktionen in der Zen Cart Administration unter Kunden > Braintree Transaktionen
+    </li></ul>
+    Portions Copyright (c) 2003 osCommerce<br>
+    Portions Copyright     (c) 2003-2021 Zen Cart</li>
+</ul>
+<p>This contribution is subject to version 3.0 of the GPL license available through the world-wide-web at the following url:<br>
+  <a href="http://www.zen-cart-pro.at/license/3_0.txt">http://www.zen-cart-pro.at/license/3_0.txt</a></p>
+</div>
+</div>
+</div>
+<!--End sc1-->
+
+<!--Begin sc2-->
+<div class="tabcontent" id="sc2" style="display: block;">
+<div class="textcontent">
+<div class="regularlist">
+
+<h2>Installation</h2>
+<h3>Voraussetzungen</h3>
+  
+  <ul>
+    <li>Bitte prüfen Sie vor der Installation dieses Updates in Ihrer Braintree Administration, ob für Ihren Account 3DS bereits aktiviert (enrolled) ist</li>
+    <li>Zahnrad > Business > Merchant Account ID Link anclicken</li>
+
+<li>Sollte dann dort so aussehen:<br/><img src="images/3ds-enrolled.jpg"></li>
+   
+    
+    </ul>
+  <p>Sollte 3DS dort nicht enrolled sein, kontaktieren Sie erst den Braintree Support und lassen 3DS freischalten.</p>
+
+      Dieses Modul ist<strong> nur für Zen Cart 1.5.6e deutsch geeignet</strong> und aktualisiert das vorintegrierte Braintree Kreditkartenmodul auf Version 2.1.0.<br>
+      <strong>Dieses Modul erfordert mindestens PHP 7.1<br>
+      Empfohlene und maximal mögliche PHP Version ist PHP 7.3
+      </strong><br>
+      <br>
+      </p>
+<div id="warning"><b>WICHTIG</b><br>
+Vor dem Einbau dieses Updates:<br>
+BACKUP von Shop und Datenbank machen! <br>
+Keine Haftung, Verwendung auf eigene Gefahr!<br>
+BACKUP gemacht? Ok, dann weiterlesen...
+</div>
+<p>Die Installation erfolgt in folgenden Schritten. Halten Sie diesen Ablauf ein!</p>
+<p><strong>WICHTIG:<br>
+  Bevor Sie beginnen notieren Sie sich Ihre derzeitigen Einstellungen unter Module > Zahlungsarten > Braintree<br>
+  Insbesondere Merchant Key ID, Public Key, Private Key und Merchant Account ID!<br>
+  Nach Aktualisierung des Moduls müssen Sie diese Einstellungen genauso wie bisher vornehmen.</strong></p>
+<p>1)<br>
+In die Zen Cart Administration einloggen.<br>
+Unter Module &gt; Zahlungsarten Braintree markieren und auf &quot;Modul deinstallieren&quot;
+<br>
+<br>
+2)<br> 
+Im Ordner NEUE DATEIEN dieses Moduls den Ordner DEINADMIN auf den Namen ihres Adminverzeichnisses umbenennen.<br>
+Dann den Inhalt des Ordners NEUE DATEIEN in der vorgegebenen Struktur in Ihr Zen Cart Verzeichnis hochladen.<br>
+Damit werden sämtliche bestehenden Dateien des bisherigen Braintree
+Moduls überschrieben. <br>
+Das ist OK, Sie müssen hier keinerlei Dateivergleiche anstellen, einfach hochladen und  die bestehenden Dateien überschreiben.<br>
+  <br>
+  3)<br>
+  In der Zen Cart Administration nun wieder auf Module &gt; Zahlungsarten, Braintree markieren und auf &quot;Modul installieren&quot;<br>
+  <br>
+  4)<br> 
+  Einstellungen des Moduls nun wieder genauso vornehmen, wie Sie sich sie zuvor notiert hatten
+<br>
+  <br>
+  5)<br>
+  Prüfen Sie nun noch folgende Datei in Ihrer Zen Cart Installation:<br>
+  includes/templates/DEINTEMPLATE/css/checkout_payment.css<br>
+  DEINTEMPLATE steht für den Namen des im Shop aktiven Templates, z.B. responsive classic<br>
+  Diese Datei enthält noch Styledefinitionen des alten Braintree Moduls, die nun nicht mehr nötig sind.<br>
+  Entfernen Sie alle Definitionen, die mit #braintree_api-cc beginnen. <br>
+  Eine Beispieldatei, die die einzige noch nötige Braintree Definition enthält, finden Sie im Ordner GEAENDERTE DATEIEN<br>
+  <br>
+  6)<br>
+Machen Sie nun eine Testbestellung und wählen als Zahlungsart Kreditkarte, um sich mit dem neuen Ablauf vertraut zu machen.<br>
+Die Eingabefelder für Vorname und Nachname gibt es nun nicht mehr, lediglich Kreditkartennummer, Ablaufdatum und CVV Code.<br>
+Bevor die Daten in die checkout_confirmation Seite übernommen werden, findet die Prüfung statt. Falls die kartenausgebende Bank für diese Karte eine 3D Secure Code oder sonstige zusätzliche Authentifizierung vorschreibt, öffnet sich in einem Ajax Popup die Bestätigungsseite der jeweiligen Bank zur Eingabe des Authentifzierungscodes.
+Wird das vom Kunden korrekt ausgefüllt, geht es weiter zur checkout_confirmation Seite, wo der Kunde wie bisher im alten Modul ganz normal mit &quot;Kaufen&quot; die Bestellung bestätigt und dadurch Zahlung und Bestellung auslöst.<br>
+Sollten Sie das ganze im Sandbox Modus verwenden, dann können Sie zum Testen diverser Szenarien spezielle Testkreditkartennummern verwenden, so wie hier beschrieben:<br>
+<a href="https://developers.braintreepayments.com/guides/3d-secure/testing-go-live/php" target="_blank">https://developers.braintreepayments.com/guides/3d-secure/testing-go-live/php</a><br>
+<br>
+7)<br>
+Unter Kunden ist nun ein neuer Menüpunkt Braintree Transaktionen vorhanden, der eine Übersicht aller via Braintree erfolgten Bestellungen gibt.
+<br>
+Die Rückerstattung via Shopadministration ist genauso wie bisher möglich. Beachten Sie bitte, dass eine Teilrückerstattung erst dann möglich ist, wenn die Transaktion den Status settled erreicht hat. Vorher wird der Button für eine Teilrückerstattung gar nicht erst erscheinen.
+</p>
+<h3>&nbsp;</h3>
+  </div>
+</div>
+</div>
+
+<!--End sc2-->
+
+<!--Begin sc5-->
+<div class="tabcontent" id="sc5" style="display: block;">
+<div class="textcontent">
+<div class="regularlist">
+<h2>Download &amp; Support</h2>
+<p>Download des Moduls:</p>
+<p><a href="https://www.zen-cart-pro.at/forum/vbdownloads.php?categoryid=12" target="_blank">www.zen-cart-pro.at/forum/vbdownloads.php?categoryid=12</a></p>
+
+<p>Supportforum zum Modul:</p>
+<p><a href="https://www.zen-cart-pro.at/forum/forums/151-Kreditkartenzahlung-mit-Braintree" target="_blank">www.zen-cart-pro.at/forum/forums/151-Kreditkartenzahlung-mit-Braintree</a></p>
+</div>
+</div>
+</div>
+<!--End sc5-->
+
+<!--Begin sc6-->
+<div class="tabcontent" id="sc6" style="display: block;">
+<div class="textcontent">
+<div class="regularlist">
+
+<h2>Unterstützen</h2>
+<p>Sie finden dieses Modul nützlich?</p>
+<p>Unterstützen Sie die Weiterentwicklung der deutschen Zen Cart Version.<br/>Wir freuen uns über Spenden zur Finanzierung des Servers und der vBulletin-Lizenz: </p>
+<p><a href="https://donorbox.org/spende-fur-die-weiterentwicklung-der-deutschen-zen-cart-version" target="_blank"><img src="https://www.zen-cart-pro.at/zencartpro-donation-white.png" alt="Spende für die Weiterentwicklung der deutschen Zen Cart Version" title="Spende für die Weiterentwicklung der deutschen Zen Cart Version"></a></p>
+<br/><br/>
+<p>Du bist Entwickler und willst helfen, die deutsche Zen Cart Version noch besser zu machen?<br>
+  Beteilige Dich auf Github:<br>
+  <a href="https://github.com/zencartpro" target="_blank"><strong>https://github.com/zencartpro</strong></a></p>
+<br/><br/>
+</div>
+</div>
+</div>
+<!--End sc6-->
+</div>
+<div id="footer">
+Ein Modul von <a href="https://www.zen-cart-pro.at" target="_blank">www.zen-cart-pro.at</a> - Die deutsche Zen Cart Version
+</div>
+</div>
+<!--end tabcontainer-->
+<script type="text/javascript">document.getElementById('sc1').style.display = 'none';</script>
+<script type="text/javascript">document.getElementById('sc2').style.display = 'none';</script>
+<script type="text/javascript">document.getElementById('sc5').style.display = 'none';</script>
+<script type="text/javascript">document.getElementById('sc6').style.display = 'none';</script>
+<script type="text/javascript">ShowTabs()</script>
+<script type="text/javascript">
+// We only show the tab links if JavaScript is available/active.
+<!--
+if (document.getElementById("slidetabsmenu") != null) {
+  document.getElementById('slidetabsmenu').style.display = "block";
+}
+//-->
+</script>
+
+</body></html>
