@@ -5,7 +5,7 @@
  * @copyright Copyright 2003-2021 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license https://www.zen-cart-pro.at/license/3_0.txt GNU General Public License V3.0
- * @version $Id: braintree_api.php 2021-02-19 22:47:14 webchills $
+ * @version $Id: braintree_api.php 2021-02-20 09:15:14 webchills $
 */
 use Braintree\Gateway;
 use Braintree\Transaction;
@@ -347,7 +347,17 @@ class braintree_api extends base {
 
 
         $clientToken = $this->gateway()->clientToken()->generate();
+        // prevent the data passed in verifyCard did not pass validation error
+        // total gets refused if 4 decimals, so we use 2 only
         $amount = zen_round($order->info['total'], 2);
+        // various fields get refused if more than 50 characters, so we limit to 49 before we pass them to verifyCard
+        $streetAddress = substr($order->billing['street_address'],0,49);
+        $streetAddressShipping = substr($order->delivery['street_address'],0,49);
+        $givenName = substr($order->billing['firstname'],0,49);
+        $surName = substr($order->billing['lastname'],0,49);
+        $givenNameShipping = substr($order->delivery['firstname'],0,49);
+        $surNameShipping = substr($order->delivery['lastname'],0,49);
+        
         if ($_SESSION['language']=='german') {
         $fieldsArray[] = [
             'field' => "
@@ -415,15 +425,27 @@ class braintree_api extends base {
                                 bin:payload.details.bin,
                                 email: '".$order->customer['email_address']."',
                                 billingAddress: {
-                                    givenName: '".$order->billing['firstname']."',
-                                    surname: '".$order->billing['lastname']."',
+                                    givenName: '".$givenName."',
+                                    surname: '".$surName."',
                                     phoneNumber: '".$order->customer['telephone']."',
-                                    streetAddress: '".$order->billing['street_address']."',
+                                    streetAddress: '".$streetAddress."',
                                     locality: '".$order->billing['city']."',
                                     region: '".$order->billing['state']."',
                                     postalCode: '".$order->billing['postcode']."',
-                                    countryCodeAlpha2: '".$order->billing['country']['iso_code_2']."',
-                                }
+                                    countryCodeAlpha2: '".$order->billing['country']['iso_code_2']."'
+                                },
+                               additionalInformation: {
+                                   shippingGivenName: '".$givenNameShipping."',
+                                   shippingSurname: '".$surNameShipping."',
+                                   shippingPhone: '".$order->customer['telephone']."',
+                                   shippingAddress: {
+                                      streetAddress: '".$streetAddressShipping."',
+                                      locality: '".$order->delivery['city']."',
+                                      region: '".$order->delivery['state']."',
+                                      postalCode: '".$order->delivery['postcode']."',
+                                      countryCodeAlpha2: '".$order->delivery['country']['iso_code_2']."'
+                                  }
+                                  },
                             })
                         }).then(function(payload){
                             console.log(payload);
@@ -638,15 +660,27 @@ class braintree_api extends base {
                                 bin:payload.details.bin,
                                 email: '".$order->customer['email_address']."',
                                 billingAddress: {
-                                    givenName: '".$order->billing['firstname']."',
-                                    surname: '".$order->billing['lastname']."',
+                                    givenName: '".$givenName."',
+                                    surname: '".$surName."',
                                     phoneNumber: '".$order->customer['telephone']."',
-                                    streetAddress: '".$order->billing['street_address']."',
+                                    streetAddress: '".$streetAddress."',
                                     locality: '".$order->billing['city']."',
                                     region: '".$order->billing['state']."',
                                     postalCode: '".$order->billing['postcode']."',
-                                    countryCodeAlpha2: '".$order->billing['country']['iso_code_2']."',
-                                }
+                                    countryCodeAlpha2: '".$order->billing['country']['iso_code_2']."'
+                                },
+                               additionalInformation: {
+                                   shippingGivenName: '".$givenNameShipping."',
+                                   shippingSurname: '".$surNameShipping."',
+                                   shippingPhone: '".$order->customer['telephone']."',
+                                   shippingAddress: {
+                                      streetAddress: '".$streetAddressShipping."',
+                                      locality: '".$order->delivery['city']."',
+                                      region: '".$order->delivery['state']."',
+                                      postalCode: '".$order->delivery['postcode']."',
+                                      countryCodeAlpha2: '".$order->delivery['country']['iso_code_2']."'
+                                  }
+                                  },
                             })
                         }).then(function(payload){
                             console.log(payload);
