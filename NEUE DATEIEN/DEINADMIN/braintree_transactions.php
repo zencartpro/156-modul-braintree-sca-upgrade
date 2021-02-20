@@ -3,7 +3,7 @@
  * @package Braintree SCA for Zen Cart German 1.5.6
  * @copyright Copyright 2003-2021 Zen Cart Development Team
  * @copyright Portions Copyright 2003 osCommerce
- * @version $Id: braintree_transactions.php 2021-02-18 17:36:14 webchills $
+ * @version $Id: braintree_transactions.php 2021-02-20 09:36:14 webchills $
 */
 
 
@@ -93,7 +93,7 @@
       <tr>
         <td><table border="0" width="100%" cellspacing="0" cellpadding="0">
           <tr>
-            <td><h1 class="pageHeading"><?php echo HEADING_ADMIN_TITLE; ?></h1><span class="supportinfo">Ihre Braintree Händler ID: <?php echo MODULE_PAYMENT_BRAINTREE_MERCHANT_ACCOUNT_ID; ?><br/><a href="https://www.braintreegateway.com/login" target="_blank">Braintree Live Login</a> | <a href="https://sandbox.braintreegateway.com/login" target="_blank">Braintree Sandbox Login</a></span><br/></td>
+            <td><h1 class="pageHeading"><?php echo HEADING_ADMIN_TITLE; ?></h1><span class="supportinfo">Braintree Merchant ID: <?php echo MODULE_PAYMENT_BRAINTREE_MERCHANT_ACCOUNT_ID; ?><br/><a href="https://www.braintreegateway.com/login" target="_blank">Braintree Live Login</a> | <a href="https://sandbox.braintreegateway.com/login" target="_blank">Braintree Sandbox Login</a></span><br/></td>
             <td class="pageHeading" align="right"><?php echo zen_draw_separator('pixel_trans.gif', HEADING_IMAGE_WIDTH, HEADING_IMAGE_HEIGHT); ?></td>
             <td class="smallText" align="right">
 
@@ -111,15 +111,15 @@
             <td valign="top"><table border="0" width="100%" cellspacing="0" cellpadding="2">
               <tr class="dataTableHeadingRow">
               	<td class="dataTableHeadingContent">ID</td>
-                <td class="dataTableHeadingContent">Bestellnummer</td>
-                <td class="dataTableHeadingContent">Nachname</td>
-                <td class="dataTableHeadingContent">Vorname</td>
-                <td class="dataTableHeadingContent">Betrag</td>
+                <td class="dataTableHeadingContent"><?php echo BT_BESTELLNUMMER; ?></td>
+                <td class="dataTableHeadingContent"><?php echo BT_NACHNAME; ?></td>
+                <td class="dataTableHeadingContent"><?php echo BT_VORNAME; ?></td>
+                <td class="dataTableHeadingContent"><?php echo BT_BETRAG; ?></td>
                 <td class="dataTableHeadingContent">Transaction ID</td>
-                <td class="dataTableHeadingContent">Datum</td>
-                <td class="dataTableHeadingContent">Kreditkarte</td>  
-                <td class="dataTableHeadingContent">Telefon</td> 
-                <td class="dataTableHeadingContent">Artikelanzahl</td> 
+                <td class="dataTableHeadingContent"><?php echo BT_DATUM; ?></td>
+                <td class="dataTableHeadingContent"><?php echo BT_KREDITKARTE; ?></td>  
+               
+                <td class="dataTableHeadingContent"><?php echo BT_ARTIKELANZAHL; ?></td> 
                 <td class="dataTableHeadingContent">Status</td> 
                <td class="dataTableHeadingContent">Email</td>
               </tr>
@@ -180,7 +180,7 @@
                 <td class="dataTableContent"> <?php echo $braintree_response->fields['txn_id']; ?> </td>
                 <td class="dataTableContent"> <?php echo $braintree_response->fields['payment_date']; ?>
                 	<td class="dataTableContent"> <?php echo $braintree_response->fields['payment_type']; ?>
-                <td class="dataTableContent"> <?php echo $braintree_response->fields['payer_phone']; ?>
+                
                 	<td class="dataTableContent"> <?php echo $braintree_response->fields['num_cart_items']; ?>
                 <td class="dataTableContent"> <?php echo $braintree_response->fields['payment_status']; ?>
                 
@@ -234,18 +234,18 @@ $action = '' ; // $_GET['action'];
 		$order = new order($braintreeInfo->order_id);
         $heading[] = array('text' => '<strong>' . TEXT_INFO_BRAINTREE_RESPONSE_BEGIN.'#'.$braintreeInfo->braintree_id.', '.TEXT_INFO_BRAINTREE_RESPONSE_END.'#'. $braintreeInfo->order_id . '</strong>');
 
-        $contents[] = array('text' =>  'Datum' . ': '. zen_datetime_short($braintreeInfo->payment_date));
-          $contents[] = array('text' =>  'TransaktionsID' . ': '.$braintreeInfo->txn_id);
-          $contents[] = array('text' =>  'Shopbestellnummer' . ': '.$braintreeInfo->order_id);
-          $contents[] = array('text' =>  'Nachname' . ': '.$braintreeInfo->last_name);
-          $contents[] = array('text' =>  'Vorname' . ': '.$braintreeInfo->first_name);
+        $contents[] = array('text' =>  '' . BT_DATUM .'' . ': '. zen_datetime_short($braintreeInfo->payment_date));
+          $contents[] = array('text' =>  'TransactionID' . ': '.$braintreeInfo->txn_id);
+          $contents[] = array('text' =>  '' . BT_BESTELLNUMMER .'' . ': '.$braintreeInfo->order_id);
+          $contents[] = array('text' =>  '' . BT_NACHNAME .'' . ': '.$braintreeInfo->last_name);
+          $contents[] = array('text' =>  '' . BT_VORNAME .'' . ': '.$braintreeInfo->first_name);
           
-          $contents[] = array('text' =>  'Betrag' . ': '.$braintreeInfo->settle_amount);
+          $contents[] = array('text' =>  '' . BT_BETRAG .'' . ': '.$braintreeInfo->settle_amount);
           $contents[] = array('text' =>  'Status' . ': '.$braintreeInfo->payment_status);
-	       $contents[] = array('text' =>  'Kreditkarte' . ': '.$braintreeInfo->payment_type);	    
+	       $contents[] = array('text' =>  '' . BT_KREDITKARTE .'' . ': '.$braintreeInfo->payment_type);	    
          $contents[] = array('text' =>  'Email' . ': '.$braintreeInfo->payer_email);
 	 
-        $contents[] = array('align' => 'center', 'text' => 'Bestellung ansehen:<br/><a href="' . zen_href_link(FILENAME_ORDERS, zen_get_all_get_params(array('braintreeId', 'action')) . 'oID=' . $braintreeInfo->order_id .'&' . 'btID=' . $braintreeInfo->braintree_id .'&action=edit' . '&referer=ipn') . '">' . zen_image_button('button_orders.gif', IMAGE_ORDERS) . '</a>');
+        $contents[] = array('align' => 'center', 'text' => '<a href="' . zen_href_link(FILENAME_ORDERS, zen_get_all_get_params(array('braintreeId', 'action')) . 'oID=' . $braintreeInfo->order_id .'&' . 'btID=' . $braintreeInfo->braintree_id .'&action=edit' . '&referer=ipn') . '">' . BT_VIEW_ORDER. '</a>');
         $count = 1;
 
 		
